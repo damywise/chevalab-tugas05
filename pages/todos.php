@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
     }
 } elseif (isset($_POST['delete'])) {
     $result = mysqli_query($link, "DELETE FROM `todos` WHERE `id` = " . $_POST['id'])
-        or die("Could not execute the insert query. <br/> <a href='/'>Go back</a>");
+        or die("Could not execute the delete query. <br/> <a href='/'>Go back</a>");
     Header('Location: /');
 } elseif (isset($_POST['toggle'])) {
     $result = mysqli_query($link, "UPDATE `todos` SET `is_completed`='" . ($_POST['is_completed'] ? "0" : "1") . "' WHERE `id`=" . $_POST['id']);
