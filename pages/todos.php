@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
 } elseif (isset($_POST['toggle'])) {
     $result = mysqli_query($link, "UPDATE `todos` SET `is_completed`='" . ($_POST['is_completed'] ? "0" : "1") . "' WHERE `id`=" . $_POST['id']);
     Header('Location: /');
-} elseif (isset($_POST['edit'])) {
+} elseif (isset($_POST['edit']) && $_POST['todo'] != "") {
     $result = mysqli_query($link, "UPDATE `todos` SET `task`='" . $_POST['todo'] . "' WHERE `id`=" . $_POST['id']);
     Header('Location: /');
 }
@@ -77,7 +77,7 @@ if (isset($_POST['submit'])) {
                                 <input id="result_<?= $value[0] ?>" type="hidden" name="todo" value="<?= $value[2] ?>">
                                 <div id="source_<?= $value[0] ?>" contenteditable="true" oninput="
                                     document.getElementById('result_<?= $value[0] ?>').value = this.innerText;
-                                    if (this.innerText == '<?= $value[2] ?>') {
+                                    if (this.innerText == '<?= $value[2] ?>' || this.innerText == '') {
                                         document.getElementById('edit_<?= $value[0] ?>').hidden = true;
                                     } else {
                                         document.getElementById('edit_<?= $value[0] ?>').hidden = false;
