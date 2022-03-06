@@ -20,7 +20,7 @@ $isLoggedIn = isset($_SESSION['valid']);
         $isLoggedIn,
         $isLoggedIn ? '
             <li class="nav-item">
-                <a class="nav-link" href="auth/logout.php">Logout</a>
+                <a class="nav-link" href="auth/logout.php">Sign Out</a>
             </li>
         '
             : ''
@@ -29,7 +29,10 @@ $isLoggedIn = isset($_SESSION['valid']);
 
     <div class="container">
 
-        <h1 class="text-center"> Login </h1>
+        <a href='/'>Kembali</a>
+        <br>
+
+        <h1 class="text-center"> Sign In </h1>
 
         <?php
 
@@ -37,7 +40,6 @@ $isLoggedIn = isset($_SESSION['valid']);
             echo '
                 <h3 class="text-center">Anda sudah log in.</h3>
                 <h4 class="text-center"><a href="/auth/logout.php">Log out</a></h4>
-                <h4 class="text-center"><a href="/">Kembali</a></h4>
         ';
         } else {
 
@@ -49,9 +51,9 @@ $isLoggedIn = isset($_SESSION['valid']);
                 $pass = mysqli_real_escape_string($link, $_POST['password']);
 
                 if ($email == "" || $pass == "") {
-                    echo "Either email or password field is empty.";
+                    echo "Email dan password tidak boleh kosong!.";
                     echo "<br/>";
-                    echo "<a href='login.php'>Go back</a>";
+                    echo "<a href='login.php'>Kembali</a>";
                 } else {
                     $result = mysqli_query($link, "SELECT * FROM users WHERE email='$email' AND password=md5('$pass')")
                         or die("Could not execute the select query.");
@@ -66,7 +68,7 @@ $isLoggedIn = isset($_SESSION['valid']);
                     } else {
                         echo "Salah memasukkan email atau password.";
                         echo "<br/>";
-                        echo "<a href='login.php'>Go back</a>";
+                        echo "<a href='login.php'>Coba Lagi</a>";
                     }
 
                     if (isset($_SESSION['valid'])) {
@@ -87,6 +89,7 @@ $isLoggedIn = isset($_SESSION['valid']);
                     </div>
                     <input type="submit" name="submit" value="Submit" class="btn btn-primary"></input>
                 </form>
+
         <?php
             }
         }

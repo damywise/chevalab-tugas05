@@ -20,7 +20,7 @@ $isLoggedIn = isset($_SESSION['valid']);
         $isLoggedIn,
         $isLoggedIn ? '
             <li class="nav-item">
-                <a class="nav-link" href="auth/logout.php">Logout</a>
+                <a class="nav-link" href="/auth/logout.php">Sign Out</a>
             </li>
         '
             : ''
@@ -29,15 +29,18 @@ $isLoggedIn = isset($_SESSION['valid']);
 
     <div class="container">
 
-        <h1 class="text-center"> Register </h1>
+
+        <a href='/'>Kembali</a>
+        <br>
+
+        <h1 class="text-center"> Sign Up </h1>
 
         <?php
 
-if (isset($_SESSION['valid'])) {
-    echo '
+        if (isset($_SESSION['valid'])) {
+            echo '
         <h3 class="text-center">Anda sudah log in.</h3>
         <h4 class="text-center"><a href="/auth/logout.php">Log out</a></h4>
-        <h4 class="text-center"><a href="/">Kembali</a></h4>
 ';
         } else {
 
@@ -51,14 +54,14 @@ if (isset($_SESSION['valid'])) {
                 if ($email == "" || $pass == "") {
                     echo "Mohon mengisi email dan password.";
                     echo "<br>";
-                    echo "<a href='register.php'>Kembali</a>";
+                    echo "<a href='register.php'>Coba Lagi</a>";
                 } else {
                     $queryCheckEmail = mysqli_query($link, "SELECT * FROM users WHERE email='$email'");
                     if (mysqli_fetch_assoc($queryCheckEmail)) {
                         die("Email sudah terdaftar <br/> <a href='/'>Kembali</a>");
                     }
                     mysqli_query($link, "INSERT INTO users(email, password) VALUES('$email', md5('$pass'))")
-                        or die("Query gagal dieksekusi. <br/> <a href='/'>Go back</a>");
+                        or die("Query gagal dieksekusi. <br/> <a href='/'>Kembali</a>");
 
                     echo "Registrasi berhasil";
                     echo "<br>";

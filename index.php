@@ -22,7 +22,7 @@ $isLoggedIn = isset($_SESSION['valid']);
         $isLoggedIn,
         $isLoggedIn ? '
             <li class="nav-item">
-                <a class="nav-link" href="auth/logout.php">Logout</a>
+                <a class="nav-link" href="auth/logout.php">Sign Out</a>
             </li>
         '
             : ''
